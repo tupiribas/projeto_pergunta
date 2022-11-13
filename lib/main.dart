@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import './questao.dart';
 import './resposta.dart';
@@ -28,7 +29,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
   ];
 
   void _responder() {
-    if (!temPerguntaSelecionada) {
+    if (temPerguntaSelecionada) {
       setState(() {
         _perguntaSelecionada++;
       });
@@ -63,7 +64,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
                       Resposta(respostas, _responder)
                     ],
                   )
-                : null));
+                : const Center(
+                    child: Text('Parabéns!',
+                        style: TextStyle(fontSize: 28)),
+                  )));
   }
 }
 
