@@ -9,7 +9,7 @@ main() {
 }
 
 class _PerguntaAppState extends State<PerguntaApp> {
-  var _perguntaSelecionada = 0;
+  int _perguntaSelecionada = 0;
   static const titulo = 'Perguntas';
 
   final List<Map<String, Object>> _perguntas = const [
@@ -28,17 +28,26 @@ class _PerguntaAppState extends State<PerguntaApp> {
   ];
 
   void _responder() {
-    setState(() {
-      _perguntaSelecionada++;
-    });
+    if (!temPerguntaSelecionada) {
+      setState(() {
+        _perguntaSelecionada++;
+      });
+    }
+  }
+
+  bool get temPerguntaSelecionada {
+    return _perguntaSelecionada < _perguntas.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    final String tituloQuestao =
-        _perguntas[_perguntaSelecionada]['texto'].toString();
-    final List<String> respostas =
-        _perguntas[_perguntaSelecionada].cast()['respostas'];
+    final String tituloQuestao = temPerguntaSelecionada
+        ? _perguntas[_perguntaSelecionada]['texto'].toString()
+        : '';
+
+    final List<String> respostas = temPerguntaSelecionada
+        ? _perguntas[_perguntaSelecionada].cast()['respostas']
+        : [];
 
     return MaterialApp(
         home: Scaffold(
@@ -47,12 +56,14 @@ class _PerguntaAppState extends State<PerguntaApp> {
                 child: Text(titulo),
               ),
             ),
-            body: Stack(
-              children: [
-                Questao(tituloQuestao),
-                Resposta(respostas, _responder)
-              ],
-            )));
+            body: temPerguntaSelecionada
+                ? Stack(
+                    children: [
+                      Questao(tituloQuestao),
+                      Resposta(respostas, _responder)
+                    ],
+                  )
+                : null));
   }
 }
 
