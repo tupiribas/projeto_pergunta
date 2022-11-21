@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Resposta extends StatelessWidget {
-  List<String> resposta;
+  final List<String> resposta;
   final void Function() onSelecionado;
 
-  Resposta(this.resposta, this.onSelecionado, {super.key});
+  const Resposta(this.resposta, this.onSelecionado, {super.key});
 
   @override
   Widget build(BuildContext context) {

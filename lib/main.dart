@@ -1,19 +1,18 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import './questao.dart';
-import './resposta.dart';
+import './questionario.dart';
+import './resultado.dart';
 
 main() {
   runApp(const PerguntaApp());
 }
 
 class _PerguntaAppState extends State<PerguntaApp> {
-  int _perguntaSelecionada = 0;
+  var _perguntaSelecionada = 0;
   static const titulo = 'Perguntas';
 
-  final List<Map<String, Object>> _perguntas = const [
+  late final List<Map<String, Object>> _perguntas = const [
     {
       'texto': 'Qual sua cor favorita?',
       'respostas': ['Preto', 'Vermelho', 'Verde', 'Branco']
@@ -42,14 +41,6 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-    final String tituloQuestao = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada]['texto'].toString()
-        : '';
-
-    final List<String> respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada].cast()['respostas']
-        : [];
-
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
@@ -58,16 +49,12 @@ class _PerguntaAppState extends State<PerguntaApp> {
               ),
             ),
             body: temPerguntaSelecionada
-                ? Stack(
-                    children: [
-                      Questao(tituloQuestao),
-                      Resposta(respostas, _responder)
-                    ],
+                ? Questionario(
+                    perguntas: _perguntas,
+                    perguntasSelecioanda: _perguntaSelecionada,
+                    responder: _responder,
                   )
-                : const Center(
-                    child: Text('Parabéns!',
-                        style: TextStyle(fontSize: 28)),
-                  )));
+                : Resultado('Parabéns!')));
   }
 }
 
