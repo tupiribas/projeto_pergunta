@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Resultado extends StatelessWidget {
-  late final String texto;
   late final int pontuacao;
   late final void Function() onReiniciarFormulario;
 
-  Resultado(this.texto, this.onReiniciarFormulario,
+  Resultado(this.onReiniciarFormulario,
       {super.key, required this.pontuacao});
 
   String get fraseResultado {
@@ -30,13 +29,13 @@ class Resultado extends StatelessWidget {
       children: [
         Center(
           child: Text(
-            texto + fraseResultado,
+            fraseResultado,
             style: const TextStyle(fontSize: 28),
           ),
         ),
-        ElevatedButton(
+        TextButton(
           onPressed: onReiniciarFormulario,
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.lightGreen),
+          style: TextButton.styleFrom(foregroundColor: Colors.blueAccent),
           child: const Text('Reiniciar?'),
         ),
       ],

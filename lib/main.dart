@@ -79,7 +79,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
                     perguntasSelecioanda: _perguntaSelecionada,
                     onResponder: _responder,
                   )
-                : Resultado(_tituloResposta, _reiniciarQuestionario,
+                : Resultado(_reiniciarQuestionario,
                     pontuacao: _pontuacaoTotal)));
   }
 }
