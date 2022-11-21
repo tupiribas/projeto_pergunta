@@ -6,35 +6,33 @@ import 'package:projeto_perguntas/resposta.dart';
 class Questionario extends StatelessWidget {
   late final List<Map<String, Object>> perguntas;
   late final int perguntasSelecioanda;
-  late final void Function() responder;
+  late final void Function() onResponder;
 
   // ignore: prefer_const_constructors_in_immutables
   Questionario({
     super.key,
     required this.perguntas,
     required this.perguntasSelecioanda,
-    required this.responder,
+    required this.onResponder,
   });
 
   bool get temPerguntaSelecionada {
     return perguntasSelecioanda < perguntas.length;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final String tituloQuestao = temPerguntaSelecionada
-        ? perguntas[perguntasSelecioanda]['texto'].toString()
+        ? perguntas[perguntasSelecioanda]['texto'] as String
         : '';
 
-    final List<String> respostas = temPerguntaSelecionada
+    final List<Map<String, Object>> respostas = temPerguntaSelecionada
         ? perguntas[perguntasSelecioanda].cast()['respostas']
+            as List<Map<String, Object>>
         : [];
 
     return Stack(
-      children: [
-        Questao(tituloQuestao),
-        Resposta(respostas, responder)
-      ],
+      children: [Questao(tituloQuestao), Resposta(respostas, onResponder)],
     );
   }
 }

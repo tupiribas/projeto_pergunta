@@ -15,15 +15,30 @@ class _PerguntaAppState extends State<PerguntaApp> {
   late final List<Map<String, Object>> _perguntas = const [
     {
       'texto': 'Qual sua cor favorita?',
-      'respostas': ['Preto', 'Vermelho', 'Verde', 'Branco']
+      'respostas': [
+        {'texto': 'Preto', 'nota': 5},
+        {'texto': 'Vermelho', 'nota': 3},
+        {'texto': 'Verde', 'nota': 1},
+        {'texto': 'Branco', 'nota': 10},
+      ]
     },
     {
       'texto': 'Qual seu animal favorito?',
-      'respostas': ['Coelho', 'Cobra', 'Elefante', 'Leão']
+      'respostas': [
+        {'texto': 'Coelho', 'nota': 10},
+        {'texto': 'Cobra', 'nota': 5},
+        {'texto': 'Elefante', 'nota': 3},
+        {'texto': 'Leão', 'nota': 1},
+      ]
     },
     {
       'texto': 'Qual sua OM favorita?',
-      'respostas': ['ESFEx', 'CIA / COMANDO', 'HGEs', 'CMC']
+      'respostas': [
+        {'texto': 'ESFEx',         'nota': 10},
+        {'texto': 'CIA / COMANDO', 'nota': 5},
+        {'texto': 'HGEs',          'nota': 3},
+        {'texto': 'CMC',           'nota': 9},
+      ]
     },
   ];
 
@@ -52,7 +67,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
                 ? Questionario(
                     perguntas: _perguntas,
                     perguntasSelecioanda: _perguntaSelecionada,
-                    responder: _responder,
+                    onResponder: _responder,
                   )
                 : Resultado('Parabéns!')));
   }

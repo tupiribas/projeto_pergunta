@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Resposta extends StatelessWidget {
-  final List<String> resposta;
+  final List<Map<String, Object>> resposta;
   final void Function() onSelecionado;
 
   const Resposta(this.resposta, this.onSelecionado, {super.key});
@@ -14,7 +14,7 @@ class Resposta extends StatelessWidget {
       child: ListView.builder(
         itemCount: resposta.length,
         itemBuilder: (context, index) =>
-            ElevatedButton(onPressed: () => onSelecionado(), child: Text(resposta[index])),
+            ElevatedButton(onPressed: () => onSelecionado(), child: Text(resposta[index].cast()['texto'])),
       ),
     );
   }
