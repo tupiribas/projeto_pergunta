@@ -10,44 +10,49 @@ main() {
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
-  static const titulo = 'Perguntas';
+  var _pontuacaoTotal = 0;
+  static const _tituloBarraNav = 'Perguntas';
+  static const _tituloResposta = 'Parabés!';
 
   late final List<Map<String, Object>> _perguntas = const [
     {
       'texto': 'Qual sua cor favorita?',
       'respostas': [
-        {'texto': 'Preto', 'nota': 5},
-        {'texto': 'Vermelho', 'nota': 3},
-        {'texto': 'Verde', 'nota': 1},
-        {'texto': 'Branco', 'nota': 10},
+        {'texto': 'Preto', 'pontuacao': 10},
+        {'texto': 'Vermelho', 'pontuacao': 5},
+        {'texto': 'Verde', 'pontuacao': 3},
+        {'texto': 'Branco', 'pontuacao': 1},
       ]
     },
     {
       'texto': 'Qual seu animal favorito?',
       'respostas': [
-        {'texto': 'Coelho', 'nota': 10},
-        {'texto': 'Cobra', 'nota': 5},
-        {'texto': 'Elefante', 'nota': 3},
-        {'texto': 'Leão', 'nota': 1},
+        {'texto': 'Coelho', 'pontuacao': 10},
+        {'texto': 'Cobra', 'pontuacao': 5},
+        {'texto': 'Elefante', 'pontuacao': 3},
+        {'texto': 'Leão', 'pontuacao': 1},
       ]
     },
     {
       'texto': 'Qual sua OM favorita?',
       'respostas': [
-        {'texto': 'ESFEx',         'nota': 10},
-        {'texto': 'CIA / COMANDO', 'nota': 5},
-        {'texto': 'HGEs',          'nota': 3},
-        {'texto': 'CMC',           'nota': 9},
+        {'texto': 'ESFEx', 'pontuacao': 10},
+        {'texto': 'CIA / COMANDO', 'pontuacao': 5},
+        {'texto': 'HGEs', 'pontuacao': 3},
+        {'texto': 'CMC', 'pontuacao': 10},
       ]
     },
   ];
 
-  void _responder() {
+  void _responder(int pontuacao) {
     if (temPerguntaSelecionada) {
       setState(() {
         _perguntaSelecionada++;
+        _pontuacaoTotal += pontuacao;
       });
     }
+
+    print(_pontuacaoTotal);
   }
 
   bool get temPerguntaSelecionada {
@@ -60,7 +65,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
         home: Scaffold(
             appBar: AppBar(
               title: const Center(
-                child: Text(titulo),
+                child: Text(_tituloBarraNav),
               ),
             ),
             body: temPerguntaSelecionada
@@ -69,7 +74,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
                     perguntasSelecioanda: _perguntaSelecionada,
                     onResponder: _responder,
                   )
-                : Resultado('Parabéns!')));
+                : Resultado(_tituloResposta, pontuacao: _pontuacaoTotal)));
   }
 }
 

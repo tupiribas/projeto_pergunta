@@ -6,7 +6,7 @@ import 'package:projeto_perguntas/resposta.dart';
 class Questionario extends StatelessWidget {
   late final List<Map<String, Object>> perguntas;
   late final int perguntasSelecioanda;
-  late final void Function() onResponder;
+  late final void Function(int) onResponder;
 
   // ignore: prefer_const_constructors_in_immutables
   Questionario({
