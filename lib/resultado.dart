@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 class Resultado extends StatelessWidget {
   late final String texto;
   late final int pontuacao;
+  late final void Function() onReiniciarFormulario;
 
-  Resultado(this.texto, {super.key, required this.pontuacao});
+  Resultado(this.texto, this.onReiniciarFormulario,
+      {super.key, required this.pontuacao});
 
   String get fraseResultado {
     if (pontuacao <= 9) {
@@ -23,11 +25,21 @@ class Resultado extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        texto + fraseResultado,
-        style: const TextStyle(fontSize: 28),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Text(
+            texto + fraseResultado,
+            style: const TextStyle(fontSize: 28),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: onReiniciarFormulario,
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.lightGreen),
+          child: const Text('Reiniciar?'),
+        ),
+      ],
     );
   }
 }
